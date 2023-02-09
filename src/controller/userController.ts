@@ -39,7 +39,7 @@ export async function LoginUser(
     })) as unknown as { [key: string]: string };
 
     const { id } = record;
-    const token = generateToken({ id });
+    const token = generateToken({ id }) as unknown as string;
     const validUser = await bcrypt.compare(req.body.password, record.password);
 
     if (!validUser) {
@@ -49,15 +49,12 @@ export async function LoginUser(
     }
 
     if (validUser) {
-      res.cookie("authorization", token, {
-        httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24,
+      res.setHeader('Authorization', token);
+      return res.status(200).json({
+        message: "Successfully logged in",
+        token,
+        record,
       });
-      res.cookie("id", id, {
-        httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24,
-      });
-      res.render("dashboard", { record });
     }
   } catch (err) {
     console.log(err);

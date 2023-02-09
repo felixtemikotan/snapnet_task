@@ -35,7 +35,6 @@ export async function LoginUser(
     }
     const record = (await UsersInstance.findOne({
       where: { email: req.body.email },
-      include: [{ model: WardsInstance, as: "ward" }],
     })) as unknown as { [key: string]: string };
 
     const { id } = record;

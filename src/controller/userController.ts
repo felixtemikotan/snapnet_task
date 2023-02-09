@@ -114,7 +114,7 @@ export async function CreateUser(
       email: req.body.email,
       password: passwordHash,
     });
-   res.status(200).json({record})
+   res.status(201).json({record})
   } catch (err) {
     res.status(500).json({
       msg: "failed to create user",
@@ -162,7 +162,7 @@ export async function CreateState(
       id: id,
       name: req.body.name,
     });
-   res.status(200).json({record})
+   res.status(201).json({record})
   } catch (err) {
     res.status(500).json({
       msg: "failed to create state",
@@ -210,7 +210,7 @@ export async function CreateLga(
       name: req.body.name,
       stateId:req.body.stateId,
     });
-   res.status(200).json({record})
+   res.status(201).json({record})
   } catch (err) {
     res.status(500).json({
       msg: "failed to create state",
@@ -259,10 +259,10 @@ export async function CreateWard(
       name: req.body.name,
       lgaId:req.body.lgaId,
     });
-   res.status(200).json({record})
+   res.status(201).json({record})
   } catch (err) {
     res.status(500).json({
-      msg: "failed to create state",
+      msg: "failed to create ward",
       route: "/create",
     });
   }
@@ -310,10 +310,10 @@ export async function CreateCitizen(
       phonenumber: req.body.phonenumber,
       wardId:req.body.wardId,
     });
-   res.status(200).json({record})
+   res.status(201).json({record})
   } catch (err) {
     res.status(500).json({
-      msg: "failed to create state",
+      msg: "failed to create citizen",
       route: "/create",
     });
   }
@@ -376,12 +376,12 @@ export async function searchByName(
     });
 
     res.status(200).json({
-      message:"All citizens fetched successfully",
+      message:"All citizens search fetched successfully",
       record:record
     })
   } catch (error) {
     res.status(500).json({
-      msg: "failed to read all citizen",
+      msg: "failed to search all citizen",
       route: "/read",
     });
   }
@@ -403,12 +403,12 @@ export async function searchByPhone(
     });
 
     res.status(200).json({
-      message:"All citizens fetched successfully",
+      message:"All citizens search fetched successfully",
       record:record
     })
   } catch (error) {
     res.status(500).json({
-      msg: "failed to read all citizen",
+      msg: "failed to search all citizen",
       route: "/read",
     });
   }

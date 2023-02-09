@@ -16,6 +16,7 @@ import { StatesInstance } from "../model/states";
 import { LgasInstance } from "../model/lgas";
 import { WardsInstance } from "../model/wards";
 import { CitizenInstance } from "../model/citizens";
+import  Sequelize, {Op}  from "sequelize";
 
 
 
@@ -355,6 +356,60 @@ export async function getAllCitizens(
     res.status(500).json({
       msg: "failed to read all citizen",
       route: "/read/:id",
+    });
+  }
+}
+
+export async function searchByName(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const {searchParam}=req.body;
+    const record = await CitizenInstance.findAll({
+      where:{
+        fullname:{
+          [Op.like]: `%${searchParam}%`
+        }
+      }
+    });
+
+    res.status(200).json({
+      message:"All citizens fetched successfully",
+      record:record
+    })
+  } catch (error) {
+    res.status(500).json({
+      msg: "failed to read all citizen",
+      route: "/read",
+    });
+  }
+}
+
+export async function searchByPhone(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const {searchParam}=req.body;
+    const record = await CitizenInstance.findAll({
+      where:{
+        phonenumber:{
+          [Op.like]: `%${searchParam}%` 
+        }
+      }
+    });
+
+    res.status(200).json({
+      message:"All citizens fetched successfully",
+      record:record
+    })
+  } catch (error) {
+    res.status(500).json({
+      msg: "failed to read all citizen",
+      route: "/read",
     });
   }
 }

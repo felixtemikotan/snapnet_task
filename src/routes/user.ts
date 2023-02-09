@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 import {
   LoginUser,LogoutUser,CreateUser,getSingleUser,CreateState,getSingleState,CreateLga,
-  getSingleLga,CreateWard,getSingleWard,CreateCitizen,getSingleCitizen
+  getSingleLga,CreateWard,getSingleWard,CreateCitizen,getSingleCitizen,getAllCitizens,
 } from "../controller/userController";
 
 
@@ -19,6 +19,7 @@ router.post("/create-ward",CreateWard)
 router.get("/get-ward",getSingleWard)
 router.post("/create-citizen",CreateCitizen)
 router.get("/get-citizen",getSingleCitizen)
+router.get("/get-all-citizens",getAllCitizens)
 
 
 

@@ -338,3 +338,23 @@ export async function getSingleCitizen(
     });
   }
 }
+
+export async function getAllCitizens(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const record = await CitizenInstance.findAll();
+
+    res.status(200).json({
+      message:"All citizens fetched successfully",
+      record:record
+    })
+  } catch (error) {
+    res.status(500).json({
+      msg: "failed to read all citizen",
+      route: "/read/:id",
+    });
+  }
+}
